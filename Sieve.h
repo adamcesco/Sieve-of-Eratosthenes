@@ -19,8 +19,8 @@ public:
     DLList<int>::Iterator erase(const DLList<int>::Iterator& iterator);
     DLList<int>::Iterator begin() { return data.begin(); }
     DLList<int>::Iterator end() { return data.end(); }
-    DLList<int>::Iterator nextFilter();
-    DLList<int>::Iterator iteratorAt(int i);
+    DLList<int>::Iterator getNextFilter();
+    DLList<int>::Iterator iteratorMappedTo(int i);
     void printContents();
 };
 
@@ -44,7 +44,7 @@ DLList<int>::Iterator Sieve::erase(const DLList<int>::Iterator &iterator) {
     return this->data.erase_at(iterator);
 }
 
-DLList<int>::Iterator Sieve::nextFilter() {
+DLList<int>::Iterator Sieve::getNextFilter() {
     auto toReturn = this->currentFilter;
     this->currentFilter = this->currentFilter->get_next();
     return DLList<int>::Iterator(toReturn);
@@ -54,9 +54,10 @@ void Sieve::printContents() {
     for (const auto& it: data) {
         std::cout << it << " ";
     }
+    std::cout << std::endl;
 }
 
-DLList<int>::Iterator Sieve::iteratorAt(int i) {
+DLList<int>::Iterator Sieve::iteratorMappedTo(int i) {
     return DLList<int>::Iterator(this->nodeMap[i]);
 }
 

@@ -6,18 +6,17 @@
 #include "Sieve.h"
 
 int main(){
-    int primeSize = 113;
-    Sieve sieve(primeSize);
+    int size = 113;     //<- must be a prime number
+    Sieve sieve(size);
 
-    for (auto i = sieve.nextFilter(); (i != sieve.end()) && (*i * *i < primeSize); i = sieve.nextFilter()) {
-        int filter = *i;
-        for (int k = filter * filter; k < primeSize; k += filter) {
-            if(k % filter == 0) {
-                auto j = sieve.iteratorAt(k);
-                if(j.ptr != nullptr)
-                    sieve.erase(j);
-            }
+    int filterNum = *sieve.getNextFilter();
+    while (filterNum * filterNum < size) {
+        for (int multiple = filterNum * filterNum; multiple < size; multiple += filterNum) {
+            auto toDelete = sieve.iteratorMappedTo(multiple);
+            if (toDelete.ptr != nullptr)
+                sieve.erase(toDelete);
         }
+        filterNum = *sieve.getNextFilter();
     }
 
     sieve.printContents();
