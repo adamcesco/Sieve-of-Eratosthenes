@@ -1,0 +1,8 @@
+//
+// Created by Adam Escobedo on 5/23/2022.
+//
+
+#ifndef SIEVE_OF_ERATOSTHENES_SIEVE_H
+#define SIEVE_OF_ERATOSTHENES_SIEVE_H
+
+#endif //SIEVE_OF_ERATOSTHENES_SIEVE_H
