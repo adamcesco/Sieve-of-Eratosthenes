@@ -9,9 +9,9 @@
 
 class OptimizedSieve {
 private:
-    std::vector<long long >* isPrime = nullptr;
-    std::vector<long long >* prime = nullptr;
-    std::vector<long long >* SPF = nullptr;
+    std::vector<bool>* isPrime = nullptr;
+    std::vector<long long int>* prime = nullptr;
+    std::vector<long long int>* SPF = nullptr;
     int iterationsCounter = 0;
     int n = 0;
 

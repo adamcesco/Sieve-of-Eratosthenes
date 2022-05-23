@@ -11,9 +11,9 @@ OptimizedSieve::OptimizedSieve(int n) {
         throw std::invalid_argument("Error in \"Sieve::Sieve(int n)\" | passed n was less than 2");
 
     this->n = n;
-    this->isPrime = new std::vector<long long >(1000001, true);
-    this->prime = new std::vector<long long >();
-    this->SPF = new std::vector<long long >(1000001);
+    this->isPrime = new std::vector<bool>(this->n, true);
+    this->prime = new std::vector<long long int>();
+    this->SPF = new std::vector<long long int>(this->n);
 }
 
 OptimizedSieve::~OptimizedSieve() {
@@ -25,32 +25,32 @@ OptimizedSieve::~OptimizedSieve() {
 void OptimizedSieve::print() {
     std::cout << "numbers of iterations: " << this->iterationsCounter << std::endl;
     std::cout << "all prime numbers from 2 to " << this->n << ':' << std::endl;
-    for (const auto& it: *this->prime) {
+    for (const auto& it: *this->prime)
         std::cout << it << " ";
-    }
     std::cout << std::endl;
 }
 
 void OptimizedSieve::sieve() {
-    iterationsCounter = 0;
+    auto& isPrimeAlias = *this->isPrime;
+    auto& primeAlias = *this->prime;
+    auto& SPFAlias = *this->SPF;
 
-    (*isPrime)[0] = (*isPrime)[1] = false ;
+    this->iterationsCounter = 0;
+    isPrimeAlias[0] = isPrimeAlias[1] = false;
 
-    for (long long int i=2; i < n; i++)
-    {
-        if ((*isPrime)[i])
-        {
-            (*prime).push_back(i);
-            (*SPF)[i] = i;
+    for (long long int i = 2; i < this->n; i++) {
+        if (isPrimeAlias[i]) {
+            primeAlias.push_back(i);
+            SPFAlias[i] = i;
         }
 
         for (long long int j=0;
-             (j < (int)prime->size()) && (i*(*prime)[j] < n && (*prime)[j] <= (*SPF)[i]);
+             (j < prime->size()) && (i * primeAlias[j] < n) && (primeAlias[j] <= SPFAlias[i]);
              j++)
         {
-            (*isPrime)[i*(*prime)[j]]=false;
-            (*SPF)[i*(*prime)[j]] = (*prime)[j] ;
-            iterationsCounter++;
+            isPrimeAlias[i * primeAlias[j]] = false;
+            SPFAlias[i * primeAlias[j]] = primeAlias[j] ;
+            ++this->iterationsCounter;
         }
     }
 }
