@@ -34,13 +34,17 @@ void OptimizedSieve::sieve() {
             this->SPF[i] = i;
         }
 
+        bool loopEntered = false;
         for (long long int j=0;
              (j < this->prime.size()) && (i * this->prime[j] < this->n) && (this->prime[j] <= this->SPF[i]);
              j++)
         {
+            loopEntered = true;
             this->isPrime[i * this->prime[j]] = false;
-            this->SPF[i * this->prime[j]] = this->prime[j] ;
+            this->SPF[i * this->prime[j]] = this->prime[j];
             ++this->iterationsCounter;
         }
+        if(loopEntered == false)
+            ++this->iterationsCounter;
     }
 }
