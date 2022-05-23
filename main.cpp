@@ -3,23 +3,14 @@
 //
 
 #include <iostream>
-#include "Sieve.h"
+#include <vector>
+#include "Sieves/EratosthenesSieve/EratosthenesSieve.h"
 
 int main(){
-    int largestPrime = 113;     //<- must be a prime number
-    Sieve sieve(largestPrime);
-
-    int filterNum = *sieve.getNextFilter();
-    while (filterNum * filterNum < largestPrime) {
-        for (int multiple = filterNum * filterNum; multiple < largestPrime; multiple += filterNum) {
-            auto toDelete = sieve.iteratorMappedTo(multiple);
-            if (toDelete.ptr != nullptr)
-                sieve.erase(toDelete);
-        }
-        filterNum = *sieve.getNextFilter();
-    }
-
-    sieve.printContents();
+    int n = 113;     //<- must be a prime number
+    EratosthenesSieve eratosthenesSieve(n);
+    eratosthenesSieve.sieve();
+    eratosthenesSieve.print();
 
     return 0;
 }
