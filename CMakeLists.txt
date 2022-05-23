@@ -3,4 +3,4 @@ project(Sieve-of-Eratosthenes)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Sieve-of-Eratosthenes main.cpp)
+add_executable(Sieve-of-Eratosthenes main.cpp DLList/DLList.h DLList/Node.h Sieve.h)
