@@ -36,8 +36,8 @@ public:
     bool is_empty() const { return (eleCount == 0); } //O(1)
     DLList<T>& clear();           //O(n) | clears all Node instances in *this LinkedList and resets all *this data-members
     DLList<T>& erase_at(int);     //O(n) | removes the Node at the given subscript from *this
-    Iterator erase_at(Iterator);
-    Node<T>* erase_at(Node<T>*);
+    Iterator erase_at(Iterator);  //O(1)
+    Node<T>* erase_at(Node<T>*);  //O(1)
     T& operator [](int);                //O(n) | returns the data, by reference, found in the Node at the given subscript
     T read_at(int) const;               //O(n) | returns a copy of the data found in the Node at the given subscript
     DLList<T>& operator =(const DLList<T>&);    //O(n) | clears *this DLList, and fills *this with a deep copy of all DSNodes from the passed DLList

@@ -6,12 +6,12 @@
 #include "Sieve.h"
 
 int main(){
-    int size = 113;     //<- must be a prime number
-    Sieve sieve(size);
+    int largestPrime = 113;     //<- must be a prime number
+    Sieve sieve(largestPrime);
 
     int filterNum = *sieve.getNextFilter();
-    while (filterNum * filterNum < size) {
-        for (int multiple = filterNum * filterNum; multiple < size; multiple += filterNum) {
+    while (filterNum * filterNum < largestPrime) {
+        for (int multiple = filterNum * filterNum; multiple < largestPrime; multiple += filterNum) {
             auto toDelete = sieve.iteratorMappedTo(multiple);
             if (toDelete.ptr != nullptr)
                 sieve.erase(toDelete);
