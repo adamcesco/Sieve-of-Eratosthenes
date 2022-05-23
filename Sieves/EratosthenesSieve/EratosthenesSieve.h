@@ -23,6 +23,7 @@ private:
     DLList<int>::Iterator advance();
 public:
     explicit EratosthenesSieve(int n);
+
     void sieve();
     void print();
     int readN() const { return this->n; }
