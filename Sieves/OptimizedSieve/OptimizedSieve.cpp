@@ -23,8 +23,9 @@ OptimizedSieve::~OptimizedSieve() {
 }
 
 void OptimizedSieve::print() {
-    std::cout << "numbers of iterations: " << this->iterationsCounter << std::endl;
-    std::cout << "all prime numbers from 2 to " << this->n << ':' << std::endl;
+    std::cout << "Optimized Sieve of Eratosthenes" << std::endl;
+    std::cout << "\tnumbers of iterations: " << this->iterationsCounter << std::endl;
+    std::cout << '\t';
     for (const auto& it: *this->prime)
         std::cout << it << " ";
     std::cout << std::endl;

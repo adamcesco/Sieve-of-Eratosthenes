@@ -44,10 +44,10 @@ DLList<int>::Iterator EratosthenesSieve::erase(Node<int> *iterator) {
 }
 
 void EratosthenesSieve::print() {
-    std::cout << "numbers of iterations: " << this->iterationsCounter << std::endl;
-    std::cout << "all prime numbers from 2 to " << this->n << ':' << std::endl;
-    for (const auto& it: this->data) {
+    std::cout << "Sieve of Eratosthenes" << std::endl;
+    std::cout << "\tnumbers of iterations: " << this->iterationsCounter << std::endl;
+    std::cout << '\t';
+    for (const auto& it: this->data)
         std::cout << it << " ";
-    }
     std::cout << std::endl;
 }

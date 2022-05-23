@@ -8,6 +8,7 @@
 
 int main(){
     int n = 113;     //<- must be a prime number
+
     EratosthenesSieve eratosthenesSieve(n);
     eratosthenesSieve.sieve();
     eratosthenesSieve.print();
