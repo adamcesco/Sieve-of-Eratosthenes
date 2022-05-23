@@ -22,6 +22,7 @@ public:
     void print();
     int readN() const { return this->n; }
     int readIterationsCounter() const { return this->iterationsCounter; }
+    std::vector<long long int>& getPrimes() { return this->prime; }
 };
 
 

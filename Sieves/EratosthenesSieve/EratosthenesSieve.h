@@ -27,6 +27,7 @@ public:
     void print();
     int readN() const { return this->n; }
     int readIterationsCounter() const { return this->iterationsCounter; }
+    DLList<int>& getPrimes() { return data; }
 };
 
 
