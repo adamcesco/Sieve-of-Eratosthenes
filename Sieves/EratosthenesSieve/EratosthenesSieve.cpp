@@ -18,6 +18,7 @@ EratosthenesSieve::EratosthenesSieve(int n) {
 }
 
 void EratosthenesSieve::sieve() {
+    this->iterationsCounter = 0;
     int filterNum = *this->advance();
     while (filterNum * filterNum < n) {
         for (int multiple = filterNum * filterNum; multiple < n; multiple += filterNum) {

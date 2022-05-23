@@ -2,8 +2,6 @@
 // Created by Adam Escobedo on 5/23/2022.
 //
 
-#include <iostream>
-#include <vector>
 #include "Sieves/EratosthenesSieve/EratosthenesSieve.h"
 
 int main(){
