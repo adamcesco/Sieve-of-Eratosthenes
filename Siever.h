@@ -2,27 +2,28 @@
 // Created by Adam Escobedo on 5/23/2022.
 //
 
-#ifndef SIEVE_OF_ERATOSTHENES_SIEVE_H
-#define SIEVE_OF_ERATOSTHENES_SIEVE_H
+#ifndef SIEVE_OF_ERATOSTHENES_SIEVER_H
+#define SIEVE_OF_ERATOSTHENES_SIEVER_H
 
 #include <unordered_map>
 #include "DLList/DLList.h"
 
-class Sieve{
+class Siever{
 private:
-    std::unordered_map<int, std::pair<Node<int> *,  bool>> nodeMap;
     DLList<int> data;
     Node<int>* currentConsider = nullptr;
 public:
-    explicit Sieve(int size);
+    std::unordered_map<int, std::pair<Node<int> *,  bool>> nodeMap;
+
+    explicit Siever(int size);
     DLList<int>::Iterator erase(const DLList<int>::Iterator& iterator);
     DLList<int>::Iterator begin() { return data.begin(); }
     DLList<int>::Iterator end() { return data.end(); }
-    DLList<int>::Iterator nextToConsider();
+    DLList<int>::Iterator nextFilter();
     void printContents();
 };
 
-Sieve::Sieve(int size) {
+Siever::Siever(int size) {
     this->data.push_back(2);
     this->currentConsider = this->data.last().ptr;
     this->nodeMap[2] = std::pair<Node<int> *,  bool>(this->currentConsider, true);
@@ -32,28 +33,21 @@ Sieve::Sieve(int size) {
     }
 }
 
-DLList<int>::Iterator Sieve::erase(const DLList<int>::Iterator &iterator) {
+DLList<int>::Iterator Siever::erase(const DLList<int>::Iterator &iterator) {
     this->nodeMap[*iterator] = std::pair<Node<int> *,  bool>(nullptr, false);
     return this->data.erase_at(iterator);
 }
 
-DLList<int>::Iterator Sieve::nextToConsider() {
-    auto& element = this->nodeMap[this->currentConsider->get()];
-    if (element.second == false){
-        this->currentConsider = this->currentConsider->get_next();
-        if(this->currentConsider != this->data.end().ptr)
-            this->nodeMap[this->currentConsider->get()].second = false;
-    }
-    else{
-        element.second = false;
-    }
-    return DLList<int>::Iterator(this->currentConsider);
+DLList<int>::Iterator Siever::nextFilter() {
+    auto toReturn = this->currentConsider;
+    this->currentConsider = this->currentConsider->get_next();
+    return DLList<int>::Iterator(toReturn);
 }
 
-void Sieve::printContents() {
+void Siever::printContents() {
     for (const auto& it: data) {
         std::cout << it << " ";
     }
 }
 
-#endif //SIEVE_OF_ERATOSTHENES_SIEVE_H
+#endif //SIEVE_OF_ERATOSTHENES_SIEVER_H
