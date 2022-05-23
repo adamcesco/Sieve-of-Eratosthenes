@@ -1,1 +1,1 @@
-# Siever-of-Eratosthenes
+# Sieve-of-Eratosthenes

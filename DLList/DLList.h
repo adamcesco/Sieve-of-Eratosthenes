@@ -37,6 +37,7 @@ public:
     DLList<T>& clear();           //O(n) | clears all Node instances in *this LinkedList and resets all *this data-members
     DLList<T>& erase_at(int);     //O(n) | removes the Node at the given subscript from *this
     Iterator erase_at(Iterator);
+    Node<T>* erase_at(Node<T>*);
     T& operator [](int);                //O(n) | returns the data, by reference, found in the Node at the given subscript
     T read_at(int) const;               //O(n) | returns a copy of the data found in the Node at the given subscript
     DLList<T>& operator =(const DLList<T>&);    //O(n) | clears *this DLList, and fills *this with a deep copy of all DSNodes from the passed DLList
@@ -291,6 +292,22 @@ typename DLList<T>::Iterator DLList<T>::erase_at(DLList<T>::Iterator iterator) {
     tail = dummy->get_prev();
     eleCount--;                                 //decrementing length variable
     delete ptr;
+
+    return toReturn;
+}
+
+template<class T>
+Node<T> * DLList<T>::erase_at(Node<T> *node) {
+    Node<T>* toReturn = node->get_next();
+
+    //the removal process and cutting ties
+    //'node' is now the node that the user wants to delete
+    node->get_next()->set_prev(node->get_prev()); //changing the 'prev' pointer of the node after 'node' to point to the node before 'node'
+    node->get_prev()->set_next(node->get_next()); //changing the 'next' pointer of the node before 'node' to point to the node after 'node'
+    head = dummy->get_next();                   //updated 'head' and 'tail' pointer
+    tail = dummy->get_prev();
+    eleCount--;                                 //decrementing length variable
+    delete node;
 
     return toReturn;
 }

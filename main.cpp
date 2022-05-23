@@ -3,23 +3,24 @@
 //
 
 #include <iostream>
-#include "Siever.h"
+#include "Sieve.h"
 
 int main(){
     int primeSize = 113;
-    Siever siever(primeSize);
+    Sieve sieve(primeSize);
 
-    for (auto i = siever.nextFilter(); (i != siever.end()) && (*i * *i < primeSize); i = siever.nextFilter()) {
-        for (int k = *i * 2; k < primeSize; k += *i) {
-            if(k % *i == 0) {
-                auto j = DLList<int>::Iterator(siever.nodeMap[k].first);
+    for (auto i = sieve.nextFilter(); (i != sieve.end()) && (*i * *i < primeSize); i = sieve.nextFilter()) {
+        int filter = *i;
+        for (int k = filter * filter; k < primeSize; k += filter) {
+            if(k % filter == 0) {
+                auto j = sieve.iteratorAt(k);
                 if(j.ptr != nullptr)
-                    siever.erase(j);
+                    sieve.erase(j);
             }
         }
     }
 
-    siever.printContents();
+    sieve.printContents();
 
     return 0;
 }
