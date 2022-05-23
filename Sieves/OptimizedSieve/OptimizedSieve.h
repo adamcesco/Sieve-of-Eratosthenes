@@ -9,14 +9,15 @@
 
 class OptimizedSieve {
 private:
-    std::vector<long long >isprime;
-    std::vector<long long >prime;
-    std::vector<long long >SPF;
+    std::vector<long long >* isPrime = nullptr;
+    std::vector<long long >* prime = nullptr;
+    std::vector<long long >* SPF = nullptr;
     int iterationsCounter = 0;
     int n = 0;
 
 public:
     explicit OptimizedSieve(int n);
+    ~OptimizedSieve();
     void sieve();
     void print();
     int readN() const { return this->n; }

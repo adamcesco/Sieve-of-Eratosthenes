@@ -6,10 +6,10 @@
 #include <iostream>
 
 EratosthenesSieve::EratosthenesSieve(int n) {
-    this->n = n;
-    if(this->n < 2)
+    if(n < 2)
         throw std::invalid_argument("Error in \"Sieve::Sieve(int n)\" | passed n was less than 2");
 
+    this->n = n;
     for (int i = 2; i <= this->n; ++i) {
         this->data.push_back(i);
         this->nodeMap[i] = this->data.last().ptr;
