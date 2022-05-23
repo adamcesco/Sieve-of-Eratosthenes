@@ -11,46 +11,35 @@ OptimizedSieve::OptimizedSieve(int n) {
         throw std::invalid_argument("Error in \"Sieve::Sieve(int n)\" | passed n was less than 2");
 
     this->n = n;
-    this->isPrime = new std::vector<bool>(this->n, true);
-    this->prime = new std::vector<long long int>();
-    this->SPF = new std::vector<long long int>(this->n);
-}
-
-OptimizedSieve::~OptimizedSieve() {
-    delete this->isPrime;
-    delete this->prime;
-    delete this->SPF;
+    this->isPrime = std::vector<bool>(this->n, true);
+    this->SPF = std::vector<long long int>(this->n);
 }
 
 void OptimizedSieve::print() {
     std::cout << "Optimized Sieve of Eratosthenes" << std::endl;
     std::cout << "\tnumber of iterations: " << this->iterationsCounter << std::endl;
     std::cout << '\t';
-    for (const auto& it: *this->prime)
+    for (const auto& it: this->prime)
         std::cout << it << " ";
     std::cout << std::endl;
 }
 
 void OptimizedSieve::sieve() {
-    auto& isPrimeAlias = *this->isPrime;
-    auto& primeAlias = *this->prime;
-    auto& SPFAlias = *this->SPF;
-
     this->iterationsCounter = 0;
-    isPrimeAlias[0] = isPrimeAlias[1] = false;
+    this->isPrime[0] = this->isPrime[1] = false;
 
     for (long long int i = 2; i < this->n; i++) {
-        if (isPrimeAlias[i]) {
-            primeAlias.push_back(i);
-            SPFAlias[i] = i;
+        if (this->isPrime[i]) {
+            this->prime.push_back(i);
+            this->SPF[i] = i;
         }
 
         for (long long int j=0;
-             (j < prime->size()) && (i * primeAlias[j] < n) && (primeAlias[j] <= SPFAlias[i]);
+             (j < this->prime.size()) && (i * this->prime[j] < this->n) && (this->prime[j] <= this->SPF[i]);
              j++)
         {
-            isPrimeAlias[i * primeAlias[j]] = false;
-            SPFAlias[i * primeAlias[j]] = primeAlias[j] ;
+            this->isPrime[i * this->prime[j]] = false;
+            this->SPF[i * this->prime[j]] = this->prime[j] ;
             ++this->iterationsCounter;
         }
     }
