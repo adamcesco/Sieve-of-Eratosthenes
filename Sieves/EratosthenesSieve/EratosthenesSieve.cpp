@@ -45,7 +45,7 @@ DLList<int>::Iterator EratosthenesSieve::erase(Node<int> *iterator) {
 
 void EratosthenesSieve::print() {
     std::cout << "Sieve of Eratosthenes" << std::endl;
-    std::cout << "\tnumbers of iterations: " << this->iterationsCounter << std::endl;
+    std::cout << "\tnumber of iterations: " << this->iterationsCounter << std::endl;
     std::cout << '\t';
     for (const auto& it: this->data)
         std::cout << it << " ";

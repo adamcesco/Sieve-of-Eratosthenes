@@ -24,7 +24,7 @@ OptimizedSieve::~OptimizedSieve() {
 
 void OptimizedSieve::print() {
     std::cout << "Optimized Sieve of Eratosthenes" << std::endl;
-    std::cout << "\tnumbers of iterations: " << this->iterationsCounter << std::endl;
+    std::cout << "\tnumber of iterations: " << this->iterationsCounter << std::endl;
     std::cout << '\t';
     for (const auto& it: *this->prime)
         std::cout << it << " ";
