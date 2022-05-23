@@ -8,7 +8,6 @@ template <class T>
 class DLList{
 public:
     struct Iterator{    //standard iterator set up, handles most basic functions of a basic iterator
-        Iterator(){ ptr = nullptr;} //there needs to be a default constructor so that the internal iterator data member can be created. Set to nullptr to disallow the use an undefined-newly-constructed iterator
         explicit Iterator(Node<T>* pssdDataPtr){ ptr = pssdDataPtr;}
 
         T& operator*() const     { return ptr->get(); }
@@ -22,7 +21,7 @@ public:
         Node<T>* ptr;
     };
     Iterator begin() const { return Iterator(dummy->get_next()); }  //dummy->get_next() is the first element in *this, AKA the head of the list
-    Iterator last() const   { return Iterator(dummy->get_prev()); }
+    Iterator last() const  { return Iterator(dummy->get_prev()); }
     Iterator end() const   { return Iterator(dummy); }  //passes dummy as the "end()" of *this because dummy is the last actual node in *this, but it is not defined with a data value, so the user cannot read from it
 
     DLList();
@@ -37,6 +36,7 @@ public:
     bool is_empty() const { return (eleCount == 0); } //O(1)
     DLList<T>& clear();           //O(n) | clears all Node instances in *this LinkedList and resets all *this data-members
     DLList<T>& erase_at(int);     //O(n) | removes the Node at the given subscript from *this
+    Iterator erase_at(Iterator);
     T& operator [](int);                //O(n) | returns the data, by reference, found in the Node at the given subscript
     T read_at(int) const;               //O(n) | returns a copy of the data found in the Node at the given subscript
     DLList<T>& operator =(const DLList<T>&);    //O(n) | clears *this DLList, and fills *this with a deep copy of all DSNodes from the passed DLList
@@ -275,6 +275,24 @@ DLList<T>& DLList<T>::operator=(const DLList<T>& passed) {
         push_back(it);
     }
     return *this;
+}
+
+template<class T>
+typename DLList<T>::Iterator DLList<T>::erase_at(DLList<T>::Iterator iterator) {
+    Node<T> *ptr = iterator.ptr;
+
+    Iterator toReturn(ptr->get_next());
+
+    //the removal process and cutting ties
+    //'ptr' is now the node that the user wants to delete
+    ptr->get_next()->set_prev(ptr->get_prev()); //changing the 'prev' pointer of the node after 'ptr' to point to the node before 'ptr'
+    ptr->get_prev()->set_next(ptr->get_next()); //changing the 'next' pointer of the node before 'ptr' to point to the node after 'ptr'
+    head = dummy->get_next();                   //updated 'head' and 'tail' pointer
+    tail = dummy->get_prev();
+    eleCount--;                                 //decrementing length variable
+    delete ptr;
+
+    return toReturn;
 }
 
 #endif //INC_22S_FLIGHT_PLANNER_DSLINKEDLIST_H
