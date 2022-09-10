@@ -17,13 +17,19 @@ public:
         SieveNode(int x, SieveNode *next, SieveNode *prev) : val(x), next(next), prev(prev) {}
     };
 
+    //constructor
     SieveList(SieveList::SieveNode *node);
+
+    //rule of 3
+    SieveList(const SieveList& list);
+    SieveList& operator=(const SieveList& list);
+    ~SieveList();
+
     void erase(SieveNode* node);
     void push_back(SieveNode* node);
     SieveNode* front() { return dummy->next; }
     SieveNode* back() { return dummy->prev; }
     SieveNode* end() { return dummy; }
-    ~SieveList();
 
 private:
     SieveNode* dummy = nullptr;
