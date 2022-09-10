@@ -2,8 +2,8 @@
 // Created by misc1 on 9/10/2022.
 //
 
-#ifndef BETTERDLL_SIEVELIST_H
-#define BETTERDLL_SIEVELIST_H
+#ifndef SIEVE_OF_ERATOSTHENES_SIEVELIST_H
+#define SIEVE_OF_ERATOSTHENES_SIEVELIST_H
 
 
 class SieveList {
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif //BETTERDLL_SIEVELIST_H
+#endif //SIEVE_OF_ERATOSTHENES_SIEVELIST_H
