@@ -13,14 +13,14 @@ int main(){
         int n = 113;     //<- must be a prime number
 
         EratosthenesSieve eratosthenesSieve(n);
-        eratosthenesSieve.sieve();
-        eratosthenesSieve.print();
+        eratosthenesSieve.sieve();  //<- sieves all the non-primes out
+        eratosthenesSieve.print();  //<- prints all the numbers currently within this sieve
         std::cout << std::endl;
 
         //OptimizedSieve class is more optimal to use for any given n larger than 499
         OptimizedSieve optimizedSieve(n);
-        optimizedSieve.sieve();
-        optimizedSieve.print();
+        optimizedSieve.sieve();     //<- sieves all the non-primes out
+        optimizedSieve.print();     //<- prints all the numbers currently within this sieve
         std::cout << std::endl;
     }
     {

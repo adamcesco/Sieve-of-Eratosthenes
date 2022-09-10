@@ -15,16 +15,6 @@ OptimizedSieve::OptimizedSieve(int n) {
     this->SPF = std::vector<long long int>(this->n);
 }
 
-void OptimizedSieve::print() {
-    std::cout << "Optimized Sieve of Eratosthenes" << std::endl;
-    std::cout << "\tn: " << this->n << std::endl;
-    std::cout << "\tnumber of iterations: " << this->iterationsCounter << std::endl;
-    std::cout << '\t';
-    for (const auto& it: this->prime)
-        std::cout << it << " ";
-    std::cout << std::endl;
-}
-
 void OptimizedSieve::sieve() {
     this->iterationsCounter = 0;
     this->isPrime[0] = this->isPrime[1] = false;
@@ -48,4 +38,14 @@ void OptimizedSieve::sieve() {
         if(loopEntered == false)
             ++this->iterationsCounter;
     }
+}
+
+void OptimizedSieve::print() {
+    std::cout << "Optimized Sieve of Eratosthenes" << std::endl;
+    std::cout << "\tn: " << this->n << std::endl;
+    std::cout << "\tnumber of iterations: " << this->iterationsCounter << std::endl;
+    std::cout << '\t';
+    for (const auto& it: this->prime)
+        std::cout << it << " ";
+    std::cout << std::endl;
 }
