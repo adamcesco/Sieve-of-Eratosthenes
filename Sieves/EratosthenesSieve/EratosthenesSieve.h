@@ -7,20 +7,18 @@
 
 
 #include <unordered_map>
-#include "../../DLList/DLList.h"
+#include "../../SieveList/SieveList.h"
 
 class EratosthenesSieve{
 private:
-    Node<int>* currentFilter = nullptr;
-    DLList<int> data;
-    std::unordered_map<int, Node<int> *> nodeMap;
+    SieveList::SieveNode* currentFilter = nullptr;
+    SieveList data;
+    std::unordered_map<int, SieveList::SieveNode*> nodeMap;
     int iterationsCounter = 0;
     int n = 0;
 
-    DLList<int>::Iterator erase(Node<int>* iterator);
-    DLList<int>::Iterator begin() { return data.begin(); }
-    DLList<int>::Iterator end() { return data.end(); }
-    DLList<int>::Iterator advance();
+    void erase(SieveList::SieveNode* node);
+    SieveList::SieveNode* advance();
 public:
     explicit EratosthenesSieve(int n);
 
@@ -28,7 +26,7 @@ public:
     void print();
     int readN() const { return this->n; }
     int readIterationsCounter() const { return this->iterationsCounter; }
-    DLList<int>& getPrimes() { return this->data; }
+    SieveList& getPrimes() { return this->data; }
 };
 
 
